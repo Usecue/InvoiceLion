@@ -1,0 +1,130 @@
+<table id="address"><tr><td>
+    <br>
+    <br>
+    <br>
+    {{customer.name}}<br>
+    att. {{customer.contact}}<br>
+    {{customer.address|convertLines}}<br>
+    <br>
+    <br>
+    <br>
+</td><td>
+    <img id="logo" src="data:image/png;base64,{{company.logo_image|encodeBase64}}" /><br>
+    {{company.address|convertLines}}<br>
+    Tel: {{company.phone}}<br>
+    IBAN: {{company.bank_account_number}}<br>
+    att. {{company.bank_account_name}}<br>
+    SWIFT: {{company.bank_bic}}<br>
+    CoC: {{company.coc_number}}<br>
+    Moms nr.: {{company.tax_number}}<br>                
+</td></tr></table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    <b>Dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    <b>Dato:</b> {{now|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>PÅMINDELSE</b></td></tr></table>
+    <br>
+    <b>Faktura dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    <b>Dato:</b> {{now|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>SIDSTE PÅMINDELSE</b></td></tr></table>
+    <br>
+    <b>Faktura dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+<br>
+<br>
+<br>
+<b>Faktureret enheder:</b><br>
+<table id="lines">
+{{for:line:lines}}
+    <tr><td>
+        {{line.name|capitalize}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td><td>
+        {{line.tax_percentage}}% VAT&nbsp;&nbsp;&nbsp;€ 
+    </td><td>
+        {{line.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endfor}}
+{{if:invoice.multiLine}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        Subtotal&nbsp;&nbsp;&nbsp;€ 
+    </td><td class="sum">
+        {{invoice.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+{{if:customer.tax_reverse_charge}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        &nbsp;
+    </td><td>
+        Eksl. moms
+    </td></tr>
+{{endif}}
+{{if:customer.tax_reverse_charge|eq(0)}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        Moms&nbsp;&nbsp;&nbsp;DKK 
+    </td><td>
+        {{invoice.tax|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+<tr><td>
+    &nbsp;
+</td><td>
+    Total&nbsp;&nbsp;&nbsp;DKK 
+</td><td class="sum">
+    {{invoice.total|formatNumber(2,44,0)}}
+</td><tr>
+</table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    Vi skal bede om indbetaling af ovenstående beløb inden for {{company.payment_period}} dage til
+    
+    We ask you kindly to transfer the amount above within {{company.payment_period}} days to 
+    IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
+    in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    We write to inform you that we have not yet received payment of the invoice above.
+    The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
+    <br>
+    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>, 
+    at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    We write to inform you that we have not yet received payment of the invoice above.
+    The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
+    <br>
+    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>, 
+    at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+    <br>
+    Should you have settled the account since this mail was written, please ignore our reminder.<br>
+{{endif}}
+<br>
+<br>
+<br>
+<br>
+<br>
+Med venlig hilsen,<br>
+<img id="signature" src="data:image/png;base64,{{company.signature_image|encodeBase64}}" /><br>
+{{company.contact}}<br>
+<table id="footer"><tr><td>Faktura nummer: {{invoice.number}}</td></tr></table>

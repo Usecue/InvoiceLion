@@ -1,0 +1,9 @@
+{{if:type|eq(hours)}}
+    {{hours.hours_worked}} timer (DKK {{hours.hourly_fee}} / time) - {{hours.name}}
+{{endif}}
+{{if:type|eq(delivery)}}
+    {{delivery.name}}
+{{endif}}
+{{if:type|eq(subscription)}}
+    {{subscription.name}} fra {{subscriptionperiod.from|formatDate("F j, Y")|translateMonth(da)}} til {{subscriptionperiod.until|formatDate("F j, Y")|translateMonth(da)}}
+{{endif}}

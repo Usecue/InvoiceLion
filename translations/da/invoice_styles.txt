@@ -1,0 +1,49 @@
+* {
+    font-family: sans-serif;
+    font-size: 9pt;
+    line-height: 1.4em;
+}
+body {
+    margin: 0.25cm;
+    margin-bottom: 1cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    text-align: left;
+}
+table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+table tr td {
+    padding: 0;
+}
+table#address tr td:first-child {
+    width: 100%;
+}
+img#logo {
+    height: 2.5em;
+}
+table#warning tr td {
+    text-align: center;
+}
+table#lines tr td {
+    text-align: right;
+} 
+table#lines tr td:first-child {
+    text-align: left;
+}
+table#footer tr td {
+    padding-top: 5px;
+}
+table#footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 0.1pt solid black;
+}
+img#signature {
+    height: 5.5em;
+}
+td.sum {
+    border-top: 0.1pt solid black;
+}
