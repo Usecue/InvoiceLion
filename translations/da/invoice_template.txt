@@ -98,26 +98,26 @@
 <br>
 {{if:invoice.reminder|eq(0)}}
     Vi skal bede om indbetaling af ovenstående beløb inden for {{company.payment_period}} dage til
-    
-    We ask you kindly to transfer the amount above within {{company.payment_period}} days to 
-    IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
-    in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+    bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b>
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
 {{endif}}
 {{if:invoice.reminder|eq(1)}}
-    We write to inform you that we have not yet received payment of the invoice above.
-    The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
+    Hermed fremsendes venlig påmindelse, at vi ikke har modtaget betaling for ovenstående faktura.
+    Betalingsbetingelserne er {{company.payment_period}} dage, hvilket er overskredet.<br>
     <br>
-    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>, 
-    at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+    Vi skal derfor bede om indbetaling af udestående faktura, senest <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>,
+    til bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
 {{endif}}
 {{if:invoice.reminder|eq(2)}}
-    We write to inform you that we have not yet received payment of the invoice above.
-    The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
+    Hermed fremsendes venlig påmindelse, at vi ikke har modtaget betaling for ovenstående faktura.
+    Betalingsbetingelserne er {{company.payment_period}} dage, hvilket er overskredet.<br>
     <br>
-    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>, 
-    at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the Faktura nummer.<br>
+    Vi skal derfor bede om indbetaling af udestående faktura, senest <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>,
+    til bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
     <br>
-    Should you have settled the account since this mail was written, please ignore our reminder.<br>
+    Hvis betalingen har krydset denne mindelse, bedes De se bort fra denne.<br> 
 {{endif}}
 <br>
 <br>
