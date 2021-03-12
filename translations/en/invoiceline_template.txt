@@ -5,5 +5,5 @@
     {{delivery.name}}
 {{endif}}
 {{if:type|eq("subscription")}}
-    {{subscription.name}} from {{subscriptionperiod.from|formatDate("F j, Y")|translateMonth(en)}} to {{subscriptionperiod.until|formatDate("F j, Y")|translateMonth(en)}}
+    {{subscription.name}} from {{subscriptionperiod.from|formatDate("F j, Y")|translateMonth("en")}} to {{subscriptionperiod.until|formatDate("F j, Y")|translateMonth("en")}}
 {{endif}}
