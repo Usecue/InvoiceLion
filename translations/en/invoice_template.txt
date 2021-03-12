@@ -22,25 +22,25 @@
 <br>
 <br>
 {{if:invoice.reminder|eq(0)}}
-    <b>Date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(en)}}<br>
+    <b>Date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth("en")}}<br>
     <b>Invoice number:</b> {{invoice.number}}<br>
     <br />{{invoice.name}}<br>
 {{endif}}
 {{if:invoice.reminder|eq(1)}}
-    <b>Datum:</b> {{now|formatDate("F j, Y")|translateMonth(en)}}<br>
+    <b>Datum:</b> {{now|formatDate("F j, Y")|translateMonth("en")}}<br>
     <br>
     <table id="warning"><tr><td><b>REMINDER</b></td></tr></table>
     <br>
-    <b>Invoice date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(en)}}<br>
+    <b>Invoice date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth("en")}}<br>
     <b>Invoice number:</b> {{invoice.number}}<br>
     <br />{{invoice.name}}<br>
 {{endif}}
 {{if:invoice.reminder|eq(2)}}
-    <b>Datum:</b> {{now|formatDate("F j, Y")|translateMonth(en)}}<br>
+    <b>Datum:</b> {{now|formatDate("F j, Y")|translateMonth("en")}}<br>
     <br>
     <table id="warning"><tr><td><b>SECOND AND LAST REMINDER</b></td></tr></table>
     <br>
-    <b>Invoice date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(en)}}<br>
+    <b>Invoice date:</b> {{invoice.date|formatDate("F j, Y")|translateMonth("en")}}<br>
     <b>Invoice number:</b> {{invoice.number}}<br>
     <br />{{invoice.name}}<br>
 {{endif}}
@@ -105,14 +105,14 @@
     We write to inform you that we have not yet received payment of the invoice above.
     The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
     <br>
-    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(en)}}</b>, 
+    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth("en")}}</b>, 
     at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the invoice number.<br>
 {{endif}}
 {{if:invoice.reminder|eq(2)}}
     We write to inform you that we have not yet received payment of the invoice above.
     The term of payment for this invoice is {{company.payment_period}} days. That period has expired.<br>
     <br>
-    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(en)}}</b>, 
+    Therefore we ask you to transfer this oustanding invoice in full, not later than <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth("en")}}</b>, 
     at IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> in {{company.bank_city}}. Please specify the invoice number.<br>
     <br>
     Should you have settled the account since this mail was written, please ignore our reminder.<br>

@@ -19,25 +19,25 @@
 <br>
 <br>
 {{if:invoice.reminder|eq(0)}}
-    <b>Datum:</b> {{invoice.date|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <b>Datum:</b> {{invoice.date|formatDate("j F Y")|translateMonth("nl")}}<br>
     <b>Factuurnummer:</b> {{invoice.number}}<br>
     <b>Betreft:</b> {{invoice.name}}<br>
 {{endif}}
 {{if:invoice.reminder|eq(1)}}
-    <b>Datum:</b> {{now|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <b>Datum:</b> {{now|formatDate("j F Y")|translateMonth("nl")}}<br>
     <br>
     <table id="warning"><tr><td><b>HERINNERING</b></td></tr></table>
     <br>
-    <b>Factuurdatum:</b> {{invoice.date|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <b>Factuurdatum:</b> {{invoice.date|formatDate("j F Y")|translateMonth("nl")}}<br>
     <b>Factuurnummer:</b> {{invoice.number}}<br>
     <b>Betreft:</b> {{invoice.name}}<br>
 {{endif}}
 {{if:invoice.reminder|eq(2)}}
-    <b>Datum:</b> {{now|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <b>Datum:</b> {{now|formatDate("j F Y")|translateMonth("nl")}}<br>
     <br>
     <table id="warning"><tr><td><b>TWEEDE EN LAATSTE HERINNERING</b></td></tr></table>
     <br>
-    <b>Factuurdatum:</b> {{invoice.date|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <b>Factuurdatum:</b> {{invoice.date|formatDate("j F Y")|translateMonth("nl")}}<br>
     <b>Factuurnummer:</b> {{invoice.number}}<br>
     <b>Betreft:</b> {{invoice.name}}<br>
 {{endif}}
@@ -102,7 +102,7 @@
     Uit onze administratie is gebleken dat bovenstaande factuur nog niet is voldaan. 
     De betalingstermijn van deze factuur is {{company.payment_period}} dagen. Deze termijn is reeds verstreken.<br>
     <br>
-    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate(j F Y)|translateMonth(nl)}}</b> het
+    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate("j F Y")|translateMonth("nl")}}</b> het
     openstaande factuurbedrag over gemaakt te hebben op IBAN {{company.bank_account_number}} ({{company.bank_name}}) 
     <b>t.n.v. {{company.bank_account_name}}</b> in {{company.bank_city}}, onder vermelding van het factuurnummer.<br>
 {{endif}}
@@ -110,7 +110,7 @@
     Uit onze administratie is gebleken dat bovenstaande factuur nog niet is voldaan. 
     De betalingstermijn van deze factuur is {{company.payment_period}} dagen. Deze termijn is reeds verstreken.<br>
     <br>
-    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate(j F Y)|translateMonth(nl)}}</b> het
+    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate("j F Y")|translateMonth("nl")}}</b> het
     openstaande factuurbedrag over gemaakt te hebben op IBAN {{company.bank_account_number}} ({{company.bank_name}}) 
     <b>t.n.v. {{company.bank_account_name}}</b> in {{company.bank_city}}, onder vermelding van het factuurnummer.<br>
     <br>
