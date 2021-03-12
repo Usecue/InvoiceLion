@@ -1,9 +1,9 @@
-{{if:type|eq(hours)}}
+{{if:type|eq("hours")}}
     {{hours.hours_worked}} uren (€ {{hours.hourly_fee}} / uur) voor {{hours.name}}
 {{endif}}
-{{if:type|eq(delivery)}}
+{{if:type|eq("delivery")}}
     {{delivery.name}}
 {{endif}}
-{{if:type|eq(subscription)}}
+{{if:type|eq("subscription")}}
     {{subscription.name}} van {{subscriptionperiod.from|formatDate(j F Y)|translateMonth(nl)}} t/m {{subscriptionperiod.until|formatDate(j F Y)|translateMonth(nl)}}
 {{endif}}

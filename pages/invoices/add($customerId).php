@@ -1,4 +1,11 @@
 <?php
+
+use MintyPHP\DB;
+use MintyPHP\DBError;
+use MintyPHP\Flash;
+use MintyPHP\InvoiceTemplate;
+use MintyPHP\Router;
+
 $customer = DB::selectOne('select * from `customers` WHERE `tenant_id` = ? AND `id` = ?', $_SESSION['user']['tenant_id'], $customerId);
 if (!$customerId) {
     Router::redirect('invoices/select');

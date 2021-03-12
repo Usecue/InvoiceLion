@@ -1,4 +1,10 @@
-<?php 
+<?php
+
+use MintyPHP\DB;
+use MintyPHP\DBError;
+use MintyPHP\Flash;
+use MintyPHP\Router;
+
 if (!empty($_POST)) {
     //check if this invoice is sent > if so... do not delete
     $invoice = DB::selectOne('SELECT `sent` FROM invoices WHERE tenant_id=? AND id=?', $_SESSION['user']['tenant_id'], $id);
