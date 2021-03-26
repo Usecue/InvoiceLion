@@ -11,7 +11,7 @@ if (!$customerId) {
     Router::redirect('invoices/select');
 }
 $highest_invoice_number = DB::selectValue('SELECT MAX(number) FROM invoices WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
-$hours = DB::select('SELECT * FROM `hours` WHERE invoiceline_id IS NULL AND hourly_fee IS NOT NULL AND `customer_id` = ? AND `tenant_id` = ?', $customerId, $_SESSION['user']['tenant_id']);
+$hours = DB::select('SELECT * FROM `hours` WHERE invoiceline_id IS NULL AND hourly_fee IS NOT NULL AND `customer_id` = ? AND `tenant_id` = ? ORDER BY `date`', $customerId, $_SESSION['user']['tenant_id']);
 $deliveries = DB::select('SELECT * FROM `deliveries` WHERE invoiceline_id IS NULL AND `customer_id` = ? AND `tenant_id` = ?', $customerId, $_SESSION['user']['tenant_id']);
 $subscriptionperiods = DB::select('SELECT * FROM subscriptions, subscriptionperiods WHERE subscriptionperiods.subscription_id = subscriptions.id AND subscriptionperiods.invoiceline_id IS NULL AND subscriptions.customer_id = ? AND subscriptions.tenant_id = ?', $customerId, $_SESSION['user']['tenant_id']);
 $template = DB::selectValue('SELECT `invoiceline_template` from `templates` WHERE `tenant_id` = ? AND `language_id`=?', $_SESSION['user']['tenant_id'], $customer['customers']['language_id']);
