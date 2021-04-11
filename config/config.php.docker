@@ -1,0 +1,26 @@
+/**
+ * This configuration file will be appended to
+ * config.php.template when the docker container is started.
+ *
+ * Configuration of the container can be controller by environment variables
+ * - DB_URL: a connection string for the database. ex. mysql://localhost/invoicelion
+ * - ENABLE_DEBUGGER: must be 1 to enable the debugger
+ * - MEMCACHE_SERVERS: a list of memcache servers separate by a comma
+ * - BASE_URL: the URL on which the app is hosted
+ */
+
+class Cache {
+    public static $servers = '127.0.0.1';
+}
+
+DB::$host = parse_url($_ENV['DB_URL'], PHP_URL_HOST) ?: DB::$host;
+DB::$username = parse_url($_ENV['DB_URL'], PHP_URL_USER) ?: DB::$username;
+DB::$password = parse_url($_ENV['DB_URL'], PHP_URL_PASS) ?: DB::$password;
+DB::$database = substr(parse_url($_ENV['DB_URL'], PHP_URL_PATH), 1) ?: DB::$database;
+DB::$port = parse_url($_ENV['DB_URL'], PHP_URL_PORT) ?: DB::$port;
+
+Debugger::$enabled = ($_ENV['ENABLE_DEBUGGER'] ?? 0) == 1;
+
+Cache::$servers = $_ENV['MEMCACHE_SERVERS'] ?? Cache::$servers;
+
+Router::$baseUrl = $_ENV['BASE_URL'] ?? Router::$baseUrl;
