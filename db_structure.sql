@@ -1,4 +1,4 @@
--- Adminer 4.7.0 MySQL dump
+-- Adminer 4.8.0 MySQL 5.5.5-10.3.25-MariaDB-0ubuntu0.20.04.1 dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -13,21 +13,30 @@ CREATE TABLE `countries` (
   `name` varchar(255) NOT NULL,
   `default_tax_percentage` decimal(10,2) NOT NULL,
   `language_id` int(11) NOT NULL,
+  `currency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `language_id` (`language_id`),
   CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `countries` (`id`, `name`, `default_tax_percentage`, `language_id`) VALUES
-(1,	'Nederland',	21.00,	1);
+INSERT INTO `countries` (`id`, `name`, `default_tax_percentage`, `language_id`, `currency_id`) VALUES
+(1,	'Nederland',	21.00,	1,	1),
+(2,	'United States',	5.00,	2,	2),
+(3,	'United Kingdom',	20.00,	2,	3);
 
 DROP TABLE IF EXISTS `currencies`;
 CREATE TABLE `currencies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `character` varchar(255) NOT NULL,
+  `abbreviation` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `currencies` (`id`, `name`, `character`, `abbreviation`) VALUES
+(1,	'Euro',	'€',	'EUR'),
+(2,	'US Dollar',	'$',	'USD'),
+(3,	'Pound Sterling',	'£',	'GBP');
 
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
@@ -36,8 +45,8 @@ CREATE TABLE `customers` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
-  `address` text,
-  `tax_reverse_charge` tinyint(1) NOT NULL DEFAULT '0',
+  `address` text DEFAULT NULL,
+  `tax_reverse_charge` tinyint(1) NOT NULL DEFAULT 0,
   `language_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tenant_id` (`tenant_id`),
@@ -57,7 +66,7 @@ CREATE TABLE `deliveries` (
   `name` varchar(255) NOT NULL,
   `subtotal` decimal(10,2) DEFAULT NULL,
   `tax_percentage` decimal(10,2) DEFAULT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   `invoiceline_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
@@ -84,7 +93,7 @@ CREATE TABLE `hours` (
   `subtotal` decimal(10,2) DEFAULT NULL,
   `tax_percentage` decimal(10,2) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   `invoiceline_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
@@ -177,9 +186,9 @@ CREATE TABLE `offers` (
   `customer_id` int(11) DEFAULT NULL,
   `approved` tinyint(1) NOT NULL,
   `signed` tinyint(1) NOT NULL,
-  `intro_html` text,
-  `planning_html` text,
-  `betaling_html` text,
+  `intro_html` text DEFAULT NULL,
+  `planning_html` text DEFAULT NULL,
+  `betaling_html` text DEFAULT NULL,
   `line1` varchar(255) DEFAULT NULL,
   `amount1` decimal(10,2) DEFAULT NULL,
   `line2` varchar(255) DEFAULT NULL,
@@ -219,6 +228,7 @@ CREATE TABLE `projects` (
   `tenant_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL,
+  `default_hourly_fee` decimal(10,2) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
@@ -236,7 +246,7 @@ CREATE TABLE `subscriptionperiods` (
   `until` date NOT NULL,
   `name` varchar(255) NOT NULL,
   `subscription_id` int(11) NOT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   `invoiceline_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tenant_id` (`tenant_id`),
@@ -258,9 +268,10 @@ CREATE TABLE `subscriptions` (
   `name` varchar(255) NOT NULL,
   `from` date NOT NULL,
   `canceled` date DEFAULT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   `subscriptiontype_id` int(11) DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
+  `referral_customer_id` int(11) DEFAULT NULL,
   `project_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
@@ -279,7 +290,7 @@ CREATE TABLE `subscriptiontypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tenant_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `comment` text,
+  `comment` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tenant_id` (`tenant_id`),
   CONSTRAINT `subscriptiontypes_ibfk_1` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`)
@@ -291,10 +302,10 @@ CREATE TABLE `templates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
   `tenant_id` int(11) NOT NULL,
-  `invoice_styles` text,
-  `invoice_template` text,
-  `invoiceline_template` text,
-  `invoice_page_number` text,
+  `invoice_styles` text DEFAULT NULL,
+  `invoice_template` text DEFAULT NULL,
+  `invoiceline_template` text DEFAULT NULL,
+  `invoice_page_number` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tenant_id` (`tenant_id`),
   KEY `language_id` (`language_id`),
@@ -309,7 +320,7 @@ CREATE TABLE `tenants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `contact` varchar(255) DEFAULT NULL,
-  `address` text,
+  `address` text DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `invoice_email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
@@ -320,22 +331,21 @@ CREATE TABLE `tenants` (
   `bank_city` varchar(255) DEFAULT NULL,
   `coc_number` varchar(255) DEFAULT NULL,
   `tax_number` varchar(255) DEFAULT NULL,
-  `default_tax_percentage` decimal(10,2) NOT NULL DEFAULT '21.00',
-  `default_hourly_fee` decimal(10,2) NOT NULL DEFAULT '75.00',
-  `payment_period` int(11) NOT NULL DEFAULT '30',
-  `reminder_period` int(11) NOT NULL DEFAULT '14',
-  `logo_image` mediumblob,
-  `signature_image` mediumblob,
-  `invoice_styles` text,
-  `invoice_template` text,
-  `invoiceline_template` text,
-  `invoice_page_number` varchar(255) DEFAULT NULL,
-  `hours_active` tinyint(1) NOT NULL DEFAULT '1',
-  `subscriptions_active` tinyint(1) NOT NULL DEFAULT '1',
+  `default_tax_percentage` decimal(10,2) NOT NULL DEFAULT 21.00,
+  `default_hourly_fee` decimal(10,2) NOT NULL DEFAULT 75.00,
+  `payment_period` int(11) NOT NULL DEFAULT 30,
+  `reminder_period` int(11) NOT NULL DEFAULT 14,
+  `logo_image` mediumblob DEFAULT NULL,
+  `signature_image` mediumblob DEFAULT NULL,
+  `hours_active` tinyint(1) NOT NULL DEFAULT 1,
+  `subscriptions_active` tinyint(1) NOT NULL DEFAULT 1,
   `country_id` int(11) NOT NULL,
+  `currency_id` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `country_id` (`country_id`),
-  CONSTRAINT `tenants_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
+  KEY `currency_id` (`currency_id`),
+  CONSTRAINT `tenants_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`),
+  CONSTRAINT `tenants_ibfk_2` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -346,7 +356,7 @@ CREATE TABLE `users` (
   `username` varchar(255) CHARACTER SET utf8 NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `created` datetime NOT NULL,
-  `superadmin` tinyint(1) NOT NULL DEFAULT '0',
+  `superadmin` tinyint(1) NOT NULL DEFAULT 0,
   `name` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
@@ -355,4 +365,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
--- 2019-04-26 00:25:33
+-- 2021-04-13 20:25:31
