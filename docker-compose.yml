@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  invoicelion:
+    build: .
+    environment:
+      DB_URL: 'mysql://invoice:lion@mysql/invoicelion'
+      MEMCACHE_SERVERS: 'memcache'
+    ports:
+      - "80:80"
+    links:
+      - memcache
+      - mysql
+  memcache:
+    image: memcached:alpine
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_USER: invoice
+      MYSQL_PASSWORD: lion
+      MYSQL_DATABASE: invoicelion
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    volumes:
+      - './db_structure.sql:/docker-entrypoint-initdb.d/001-structure.sql'
