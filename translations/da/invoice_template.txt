@@ -1,0 +1,130 @@
+<table id="address"><tr><td>
+    <br>
+    <br>
+    <br>
+    {{customer.name}}<br>
+    att. {{customer.contact}}<br>
+    {{customer.address|convertLines}}<br>
+    <br>
+    <br>
+    <br>
+</td><td>
+    <img id="logo" src="data:image/png;base64,{{company.logo_image|encodeBase64}}" /><br>
+    {{company.address|convertLines}}<br>
+    Tel: {{company.phone}}<br>
+    IBAN: {{company.bank_account_number}}<br>
+    att. {{company.bank_account_name}}<br>
+    SWIFT: {{company.bank_bic}}<br>
+    CoC: {{company.coc_number}}<br>
+    Moms nr.: {{company.tax_number}}<br>                
+</td></tr></table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    <b>Dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    <b>Dato:</b> {{now|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>PÅMINDELSE</b></td></tr></table>
+    <br>
+    <b>Faktura dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    <b>Dato:</b> {{now|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>SIDSTE PÅMINDELSE</b></td></tr></table>
+    <br>
+    <b>Faktura dato:</b> {{invoice.date|formatDate("F j, Y")|translateMonth(da)}}<br>
+    <b>Faktura nummer:</b> {{invoice.number}}<br>
+    <br />{{invoice.name}}<br>
+{{endif}}
+<br>
+<br>
+<br>
+<b>Faktureret enheder:</b><br>
+<table id="lines">
+{{for:line:lines}}
+    <tr><td>
+        {{line.name|capitalize}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td><td>
+        {{line.tax_percentage}}% VAT&nbsp;&nbsp;&nbsp;€ 
+    </td><td>
+        {{line.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endfor}}
+{{if:invoice.multiLine}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        Subtotal&nbsp;&nbsp;&nbsp;€ 
+    </td><td class="sum">
+        {{invoice.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+{{if:customer.tax_reverse_charge}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        &nbsp;
+    </td><td>
+        Eksl. moms
+    </td></tr>
+{{endif}}
+{{if:customer.tax_reverse_charge|eq(0)}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        Moms&nbsp;&nbsp;&nbsp;DKK 
+    </td><td>
+        {{invoice.tax|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+<tr><td>
+    &nbsp;
+</td><td>
+    Total&nbsp;&nbsp;&nbsp;DKK 
+</td><td class="sum">
+    {{invoice.total|formatNumber(2,44,0)}}
+</td><tr>
+</table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    Vi skal bede om indbetaling af ovenstående beløb inden for {{company.payment_period}} dage til
+    bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b>
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    Hermed fremsendes venlig påmindelse, at vi ikke har modtaget betaling for ovenstående faktura.
+    Betalingsbetingelserne er {{company.payment_period}} dage, hvilket er overskredet.<br>
+    <br>
+    Vi skal derfor bede om indbetaling af udestående faktura, senest <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>,
+    til bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    Hermed fremsendes venlig påmindelse, at vi ikke har modtaget betaling for ovenstående faktura.
+    Betalingsbetingelserne er {{company.payment_period}} dage, hvilket er overskredet.<br>
+    <br>
+    Vi skal derfor bede om indbetaling af udestående faktura, senest <b>{{company.reminder_period|relativeDate|formatDate("F j, Y")|translateMonth(da)}}</b>,
+    til bankkonto IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>att. {{company.bank_account_name}}</b> 
+    i {{company.bank_city}}. Venligst påfør faktura nummer ved indbetaling.<br>
+    <br>
+    Hvis betalingen har krydset denne mindelse, bedes De se bort fra denne.<br> 
+{{endif}}
+<br>
+<br>
+<br>
+<br>
+<br>
+Med venlig hilsen,<br>
+<img id="signature" src="data:image/png;base64,{{company.signature_image|encodeBase64}}" /><br>
+{{company.contact}}<br>
+<table id="footer"><tr><td>Faktura nummer: {{invoice.number}}</td></tr></table>
