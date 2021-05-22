@@ -1,4 +1,7 @@
 <?php
+
+use MintyPHP\Buffer;
+
 ob_start();
 list($x, $y, $text) = explode(',', str_replace('"', '', $template['templates']['invoice_page_number']));
 ?>
@@ -25,8 +28,8 @@ ob_end_clean();
 $options = new Dompdf\Options();
 $options->set("isPhpEnabled", true);
 $dompdf = new Dompdf\Dompdf($options);
-$dompdf->load_html($html);
-$dompdf->set_paper("a4");
+$dompdf->loadHtml($html);
+$dompdf->setPaper("A4");
 $dompdf->render();
 
 $filename = $invoice['invoices']['number'] . ' - ' . $invoice['invoices']['name'] . ".pdf";

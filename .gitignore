@@ -10,7 +10,7 @@ config/config.php
 /vendor/
 /sessions/
 /web/debugger/
-syncdb.sh
+syncdata.sh
 /pages/offers/
 /pdfimages/
 /tests/vendor
