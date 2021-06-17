@@ -18,7 +18,7 @@
     <tr class="hover" onclick="window.location.href='deliveries/view/<?php e($row['deliveries']['id']);?>';">
       <td class="date"><span><?php e($row['deliveries']['date']);?></span></td>
       <td class="name"><span><?php e($row['deliveries']['name']);?></span></td>
-      <td class="text"><span><?php if(isset($row['deliveries']['customer_id'])) { ?><a href="projects/view/<?php e($row['deliveries']['customer_id']); ?>"><?php e($customers[$row['deliveries']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="text"><span><?php if(isset($row['deliveries']['customer_id'])) { ?><a href="customers/view/<?php e($row['deliveries']['customer_id']); ?>"><?php e($customers[$row['deliveries']['customer_id']]);?></a><?php } ?></span></td>
       <td class="money"><span><?php if($row['deliveries']['subtotal']) e($row['deliveries']['subtotal']); else e('0'); ?></span></td>
     </tr>
     <?php endforeach; ?>

@@ -1,0 +1,1 @@
+ssh invoicelion@ams01.usecue.nl mysqldump -pURYhiKMOeGlz6JF69KKO -uinvoicelion invoicelion | sudo mysql invoicelion
