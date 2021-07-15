@@ -80,16 +80,16 @@
         },
         {
             "name": "mintyphp/core",
-            "version": "v2.5.10",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mintyphp/core.git",
-                "reference": "7985cfddd372212c53ba5a29e1e7d11cdaff9490"
+                "reference": "c5bb69bbcb04493f3fee7a86f76e1c84e127ab03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mintyphp/core/zipball/7985cfddd372212c53ba5a29e1e7d11cdaff9490",
-                "reference": "7985cfddd372212c53ba5a29e1e7d11cdaff9490",
+                "url": "https://api.github.com/repos/mintyphp/core/zipball/c5bb69bbcb04493f3fee7a86f76e1c84e127ab03",
+                "reference": "c5bb69bbcb04493f3fee7a86f76e1c84e127ab03",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,11 @@
                     "homepage": "https://www.tqdev.com"
                 }
             ],
-            "time": "2021-04-30T13:19:58+00:00"
+            "support": {
+                "issues": "https://github.com/mintyphp/core/issues",
+                "source": "https://github.com/mintyphp/core/tree/v2.5.12"
+            },
+            "time": "2021-07-06T14:27:54+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -146,6 +150,10 @@
             ],
             "description": "A library to read, parse, export and make subsets of different types of font files.",
             "homepage": "https://github.com/PhenX/php-font-lib",
+            "support": {
+                "issues": "https://github.com/PhenX/php-font-lib/issues",
+                "source": "https://github.com/PhenX/php-font-lib/tree/0.5.2"
+            },
             "time": "2020-03-08T15:31:32+00:00"
         },
         {
@@ -186,20 +194,24 @@
             ],
             "description": "A library to read, parse and export to PDF SVG files.",
             "homepage": "https://github.com/PhenX/php-svg-lib",
+            "support": {
+                "issues": "https://github.com/PhenX/php-svg-lib/issues",
+                "source": "https://github.com/PhenX/php-svg-lib/tree/master"
+            },
             "time": "2019-09-11T20:02:13+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.4.1",
+            "version": "v6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "9256f12d8fb0cd0500f93b19e18c356906cbed3d"
+                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/9256f12d8fb0cd0500f93b19e18c356906cbed3d",
-                "reference": "9256f12d8fb0cd0500f93b19e18c356906cbed3d",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a5b5c43e50b7fba655f793ad27303cd74c57363c",
+                "reference": "a5b5c43e50b7fba655f793ad27303cd74c57363c",
                 "shasum": ""
             },
             "require": {
@@ -252,7 +264,17 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2021-04-29T12:25:04+00:00"
+            "support": {
+                "issues": "https://github.com/PHPMailer/PHPMailer/issues",
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Synchro",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-16T14:33:43+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -297,6 +319,10 @@
                 "parser",
                 "stylesheet"
             ],
+            "support": {
+                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
+                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.3.1"
+            },
             "time": "2020-06-01T09:10:00+00:00"
         }
     ],
@@ -330,20 +356,24 @@
                     "homepage": "https://www.tqdev.com"
                 }
             ],
+            "support": {
+                "issues": "https://github.com/mintyphp/debugger/issues",
+                "source": "https://github.com/mintyphp/debugger/tree/v2.0.4"
+            },
             "time": "2020-06-16T15:13:05+00:00"
         },
         {
             "name": "mintyphp/tools",
-            "version": "v2.0.6",
+            "version": "v2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mintyphp/tools.git",
-                "reference": "2e19ea6ee859683db0693210bfccb96e784e50f3"
+                "reference": "8bb473000da79b79b461c2760082fd5fa0771cbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mintyphp/tools/zipball/2e19ea6ee859683db0693210bfccb96e784e50f3",
-                "reference": "2e19ea6ee859683db0693210bfccb96e784e50f3",
+                "url": "https://api.github.com/repos/mintyphp/tools/zipball/8bb473000da79b79b461c2760082fd5fa0771cbb",
+                "reference": "8bb473000da79b79b461c2760082fd5fa0771cbb",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +391,11 @@
                     "homepage": "https://www.tqdev.com"
                 }
             ],
-            "time": "2020-06-25T10:40:29+00:00"
+            "support": {
+                "issues": "https://github.com/mintyphp/tools/issues",
+                "source": "https://github.com/mintyphp/tools/tree/v2.0.7"
+            },
+            "time": "2021-06-08T18:14:15+00:00"
         }
     ],
     "aliases": [],
@@ -370,5 +404,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
